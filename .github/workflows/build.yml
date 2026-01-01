@@ -1,4 +1,4 @@
-name: Build FireDog (All Platforms)
+name: Build FireDog Windows
 
 on:
   push:
@@ -7,71 +7,29 @@ on:
     branches: [ main ]
 
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          path: .
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
+        working-directory: .
 
-      - name: Build FireDog (Windows)
+      - name: Build FireDog
         run: npm run build
+        working-directory: .
 
-      - name: Upload artifact
+      - name: Upload artefatos
         uses: actions/upload-artifact@v4
         with:
           name: FireDog-Windows
-          path: dist/*
-
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build FireDog (Linux)
-        run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: FireDog-Linux
-          path: dist/*
-
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build FireDog (macOS)
-        run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: FireDog-macOS
           path: dist/*
