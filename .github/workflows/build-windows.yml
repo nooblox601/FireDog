@@ -25,11 +25,9 @@ jobs:
       - name: Build FireDog
         run: npm run build
 
-      - name: Upload instalador
-        uses: actions/upload-artifact@v3
-        with:
-          name: FireDog-Windows
-          path: dist/*
+- name: Upload instalador
+  uses: actions/upload-artifact@v4
+  with:
+    name: FireDog-Windows
+    path: dist/*
 
-
-      
